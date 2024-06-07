@@ -1,0 +1,26 @@
+.custom-navbar, .custom-footer {
+    background-color: #343a40;
+    color: white;
+}
+
+.custom-navbar a.nav-link, .custom-footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.custom-navbar a.nav-link:hover, .custom-footer a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    padding: 20px 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
