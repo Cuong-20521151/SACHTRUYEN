@@ -1,7 +1,6 @@
 @extends('layout')
 @section('content')
 
-
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
@@ -15,11 +14,11 @@
         <h4>{{ $chapter->truyen->tentruyen }}</h4>
         <p>Chương hiện tại: {{ $chapter->TieuDe }}</p>
 
-        <div class="col-md-5">
+        <div class="col-md-5 mb-4">
             <div class="form-group">
                 <label for="selectChapter">Chọn chương</label>
                 <p>
-                    <a class="btn btn-primary {{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}" href="{{ url('xem-chuong/'.$previous_chapter) }}">Tập Trước</a>
+                    <a class="btn btn-primary {{ $chapter->id == $min_id->id ? 'disabled' : '' }}" href="{{ url('xem-chuong/'.$previous_chapter) }}">Tập Trước</a>
                 </p>
                 <select name="select-chapter" class="select-chapter custom-select">
                     @foreach($all_chapter as $key => $chap)
@@ -27,7 +26,7 @@
                     @endforeach
                 </select>
                 <p class="mt-4">
-                    <a class="btn btn-primary {{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}" href="{{ url('xem-chuong/'.$next_chapter) }}">Tập Sau</a>
+                    <a class="btn btn-primary {{ $chapter->id == $max_id->id ? 'disabled' : '' }}" href="{{ url('xem-chuong/'.$next_chapter) }}">Tập Sau</a>
                 </p>
             </div>
         </div>
@@ -36,7 +35,7 @@
             {!! nl2br(e($chapter->NoiDung)) !!}
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5 mt-4">
             <div class="form-group">
                 <label for="selectChapter">Chọn chương</label>
                 <select name="select-chapter" class="select-chapter custom-select">
@@ -47,7 +46,7 @@
             </div>
         </div>
 
-        <div>
+        <div class="mt-4">
             <h3>Lưu và chia sẻ truyện:</h3>
             <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>

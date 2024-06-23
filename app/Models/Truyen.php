@@ -11,15 +11,18 @@ class Truyen extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'TenTruyen','TenSlugTruyen','NoiDungTruyen','DanhMuc','HinhAnh','KichHoat'
+        'TenTruyen', 'TenSlugTruyen', 'TacGia', 'NoiDungTruyen', 'DanhMuc', 'HinhAnh', 'KichHoat'
     ];
     protected $primaryKey = 'id';
-    protected $table = 'truyen';
+    protected $table = 'Truyen'; // Đảm bảo nhất quán với tên bảng trong migration
 
-    public function danhmucTruyen(){
-        return $this->belongsTo('App\Models\DanhmucTruyen', 'DanhMuc', 'id');
+    public function danhmucTruyen()
+    {
+        return $this->belongsTo(DanhmucTruyen::class, 'DanhMuc', 'id');
     }
-    public function Chapter(){
-        return $this->hasMany('App\Models\Chapter','id_truyen','id');
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class, 'id_truyen', 'id');
     }
 }

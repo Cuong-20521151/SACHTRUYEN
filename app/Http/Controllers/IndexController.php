@@ -14,8 +14,7 @@ class IndexController extends Controller
         $list_truyen = Truyen::orderBy('id', 'DESC')->where('KichHoat', 0)->get();
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
         $truyen = Truyen::orderBy('id', 'DESC')->where('KichHoat', 0)->get();
-        $tentruyen = Truyen::with('danhmucTruyen')->where('id', $truyen->id_truyen)->first();
-        return view('pages.home')->with(compact('danhmuc', 'truyen', 'list_truyen', 'tentruyen'));
+        return view('pages.home')->with(compact('danhmuc', 'truyen', 'list_truyen'));
     }
 
     public function theloai($slug)
@@ -43,10 +42,10 @@ class IndexController extends Controller
         $truyen = Chapter::where('TenSlugChapter', $slug)->first();
         $chapter = Chapter::with('truyen')->where('TenSlugChapter', $slug)->where('id_truyen', $truyen->id_truyen)->first();
         $all_chapter = Chapter::with('truyen')->orderBy('id', 'ASC')->where('id_truyen', $truyen->id_truyen)->get();
-        $max_id = Chapter::where('id_truyen', $truyen->id)->orderBy('id', 'DESC')->first();
-        $min_id = Chapter::where('id_truyen', $truyen->id)->orderBy('id', 'ASC')->first();
-        $next_chapter = Chapter::where('id_truyen', $truyen->id)->where('id', '>', $chapter->id)->min('TenSlugChapter');
-        $previous_chapter = Chapter::where('id_truyen', $truyen->id)->where('id', '<', $chapter->id)->max('TenSlugChapter');
+        $max_id = Chapter::where('id_truyen', $truyen->id_truyen)->orderBy('id', 'DESC')->first();
+        $min_id = Chapter::where('id_truyen', $truyen->id_truyen)->orderBy('id', 'ASC')->first();
+        $next_chapter = Chapter::where('id_truyen', $truyen->id_truyen)->where('id', '>', $chapter->id)->min('TenSlugChapter');
+        $previous_chapter = Chapter::where('id_truyen', $truyen->id_truyen)->where('id', '<', $chapter->id)->max('TenSlugChapter');
         $tentruyen = Truyen::with('danhmucTruyen')->where('id', $truyen->id_truyen)->first();
 
         return view('pages.chapter')->with(compact('danhmuc', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'tentruyen'));

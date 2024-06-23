@@ -1,90 +1,96 @@
 @extends('layout')
+
 @section('content')
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">{{ $tentruyen->TenTruyen }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ $chapter->TieuDe }}</li>
-    </ol>
-</nav>
-
-<div class="row">
-    <div class="col-md-12">
-        <h4>{{ $chapter->truyen->tentruyen }}</h4>
-        <p>Chương hiện tại: {{ $chapter->TieuDe }}</p>
-
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="selectChapter">Chọn chương</label>
-                <p>
-                    @if ($previous_chapter)
-                        <a class="btn btn-primary" href="{{ url('xem-chuong/'.$previous_chapter) }}">Tập Trước</a>
-                    @else
-                        <a class="btn btn-primary isDisabled">Tập Trước</a>
-                    @endif
-                </p>
-                <select name="select-chapter" class="select-chapter custom-select">
-                    @foreach($all_chapter as $key => $chap)
-                        <option value="{{ url('xem-chuong/'.$chap->TenSlugChapter) }}">{{ $chap->TieuDe }}</option>
-                    @endforeach
-                </select>
-                <p class="mt-4">
-                    @if ($next_chapter)
-                        <a class="btn btn-primary {{ $chapter->id == optional($max_id)->id ? 'isDisabled' : '' }}" href="{{ url('xem-chuong/'.$next_chapter) }}">Tập Sau</a>
-                    @else
-                        <a class="btn btn-primary isDisabled">Tập Sau</a>
-                    @endif
-                </p>
+<head>
+    <link href="{{ asset('css/Truyen.css')}}" rel="stylesheet">
+</head>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url()->current() }}">{{ $truyen->TenTruyen }}</a></li>
+        </ol>
+    </nav>
+    @php
+    $mucluc = count($chapter);
+    @endphp
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-3">
+                    <img class="card-img-top" src="{{ asset('public/uploads/truyen/'.$truyen->HinhAnh) }}" alt="{{ $truyen->TenTruyen }}" style="border: 1px solid black;">
+                </div>
+                <div class="col-md-9">
+                    <style>
+                        .infotruyen {
+                            list-style: none;
+                            padding: 0;
+                        }
+                        .infotruyen li {
+                            margin-bottom: 5px;
+                        }
+                        .infotruyen li strong {
+                            font-weight: bold;
+                        }
+                    </style>
+                    <ul class="infotruyen">
+                        <li><strong>Tác giả:</strong> {{ $truyen->TacGia }}</li>
+                        <li><strong>Danh mục truyện:</strong> 
+                            <a href="{{ url('the-loai/'.$truyen->danhmucTruyen->TenSlug) }}">
+                                {{ $truyen->danhmucTruyen->TenDanhMuc }}
+                            </a>
+                        </li>
+                        <li><strong>Số chapter:</strong> {{ $truyen->so_chapter }}</li>
+                        <li><strong>Số lượt xem:</strong> {{ $truyen->luotxem }}</li>
+                        @if ($mucluc > 0)
+                            <li><a href="{{url('xem-chuong/'.$chapter_dau->TenSlugChapter)}}" class="btn btn-primary">Đọc Online</a></li>
+                        @else
+                            <li><a href="#" class="btn btn-primary">Đọc Online</a></li>
+                        @endif
+                    </ul>
+                </div>
             </div>
-        </div>
-
-        <div class="noidungchuong">
-            {!! nl2br(e($chapter->NoiDung)) !!}
-        </div>
-
-        <div class="col-md-5">
-            <div class="form-group">
-                <label for="selectChapter">Chọn chương</label>
-                <select name="select-chapter" class="select-chapter custom-select">
-                    @foreach($all_chapter as $key => $chap)
-                        <option value="{{ url('xem-chuong/'.$chap->TenSlugChapter) }}">{{ $chap->TieuDe }}</option>
-                    @endforeach
-                </select>
+            <div class="col-md-12 mt-3">
+                <h4>Nội dung truyện</h4>
+                <p>{{ $truyen->NoiDungTruyen }}</p>
             </div>
-        </div>
-
-        <div>
-            <h3>Lưu và chia sẻ truyện:</h3>
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <hr>
+            <h4>Mục lục</h4>
+            <ul class="mucluctruyen" style="list-style: none; padding: 0;">
+                @if ($mucluc > 0)
+                    @foreach($chapter as $key => $chap)
+                        <li style="margin-bottom: 5px;"><a href="{{ url('xem-chapter/'.$chap->slug_chapter) }}">{{ $chap->TieuDe }}</a></li>
+                    @endforeach
+                @else
+                    <li>Đang cập nhật...</li>
+                @endif
+            </ul>
+            <hr>
+            <div class="col-md-12">
+                <h4>Sách cùng danh mục</h4>
+                <div class="row">
+                    @foreach ($truyencungtheloai as $truyen)
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm" style="border: 1px solid black;">
+                            <img class="card-img-top" src="{{ asset('public/uploads/truyen/'.$truyen->HinhAnh) }}" alt="{{ $truyen->TenTruyen }}" style="height: 300px; object-fit: cover;">
+                            <div class="card-body" style="height: 220px">
+                                <h5 class="card-title" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ $truyen->TenTruyen }}</h5>
+                                <p class="card-text">{{ Str::limit($truyen->NoiDungTruyen, 100) }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-eye"></i> 100</a>
+                                        <a href="{{ url('xem-truyen/'.$truyen->TenSlugTruyen) }}" class="btn btn-sm btn-outline-secondary">Đọc ngay</a>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        var selectChapterElements = document.querySelectorAll('.select-chapter');
-
-        selectChapterElements.forEach(function(selectElement) {
-            selectElement.addEventListener('change', function() {
-                var url = this.value;
-                if (url) {
-                    window.location.href = url;
-                }
-            });
-
-            // Set the current chapter as selected
-            var currentUrl = window.location.href;
-            var options = selectElement.options;
-            for (var i = 0; i < options.length; i++) {
-                if (options[i].value === currentUrl) {
-                    options[i].selected = true;
-                    break;
-                }
-            }
-        });
-    });
-</script>
+</body>
 
 @endsection

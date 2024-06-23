@@ -36,3 +36,45 @@
 .form-group {
     margin-bottom: 20px;
 }
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.infotruyen {
+    list-style: none;
+    padding: 0;
+}
+
+.infotruyen li {
+    margin-bottom: 5px;
+}
+
+.infotruyen li strong {
+    font-weight: bold;
+}
+
+.card {
+    border: 1px solid black;
+}
+
+.card-img-top {
+    border-bottom: 1px solid black;
+    height: 300px;
+    object-fit: cover;
+}
+
+.carousel-item-content {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.mucluctruyen li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.mucluctruyen li a:hover {
+    text-decoration: underline;
+}

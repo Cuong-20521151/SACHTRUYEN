@@ -1,0 +1,44 @@
+.owl-carousel .item {
+    position: relative;
+    padding: 10px; /* Giảm padding nếu cần */
+    cursor: pointer;
+}
+
+.item {
+    background: #fff;
+    border: 2px solid #000; /* Viền đen mỏng */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    height: 100%; /* Đảm bảo chiều cao bằng nhau */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carousel-item-content img {
+    width: 100%;
+    height: 250px; /* Điều chỉnh chiều cao ảnh nếu cần */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-item-content h3 {
+    margin-top: 10px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.carousel-item-content p {
+    margin-top: 5px;
+    color: #888;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-item-content p i {
+    margin-right: 5px;
+}

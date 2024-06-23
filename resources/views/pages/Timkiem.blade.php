@@ -11,23 +11,26 @@
 <h3>TÌM TRUYỆN VỚI TỪ KHOÁ: {{$tukhoa}}</h3>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    @foreach ($truyen as $truyenItem)
-        <div class="col">
-            <div class="card shadow-sm">
-                <img class="card-img-top" src="{{ asset('public/uploads/truyen/'.$truyenItem->HinhAnh) }}" alt="{{ $truyenItem->TenTruyen }}">
-                <div class="card-body">
-                    <h3>{{ $truyenItem->TenTruyen }}</h3>
-                    <p class="card-text">{{ $truyenItem->NoiDungTruyen }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-eye"></i> 100</a>
-                            <a class="btn btn-sm btn-outline-secondary" href="{{ url('xem-truyen/'.$truyenItem->TenSlugTruyen) }}">Đọc ngay</a>
-                        </div>
-                        <small class="text-muted">9 mins</small>
+    @foreach ($truyen as $value)
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="image-wrapper">
+                <img class="card-img-top" src="{{asset('public/uploads/truyen/'.$value->HinhAnh)}}" alt="{{$value->TenTruyen}}" style="height: 400px">
+            </div>
+
+            <div class="card-body d-flex flex-column">
+                <h3 class="card-title">{{$value->TenTruyen}}</h3>
+                <p class="card-text">{{$value->NoiDungTruyen}}</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-eye"></i> 100</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="{{url('xem-truyen/'.$value->TenSlugTruyen)}}">Đọc ngay</a>
                     </div>
+                    <small class="text-muted">9 mins</small>
                 </div>
             </div>
         </div>
+    </div>
     @endforeach
 </div>
 

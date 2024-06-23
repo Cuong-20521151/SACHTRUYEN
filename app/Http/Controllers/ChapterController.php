@@ -15,7 +15,7 @@ class ChapterController extends Controller
      */
     public function index()
     {
-        $list_chapter = Chapter::with('Truyen')->orderBy('id','DESC')->get();
+        $list_chapter = Chapter::with('Truyen')->orderBy('id', 'DESC')->get();
         return view('admincp.chapter.index')->with(compact('list_chapter'));
     }
 
@@ -26,7 +26,7 @@ class ChapterController extends Controller
      */
     public function create()
     {
-        $list_truyen = Truyen::orderBy('id','DESC')->get();
+        $list_truyen = Truyen::orderBy('id', 'DESC')->get();
         return view('admincp.chapter.create')->with(compact('list_truyen'));
     }
 
@@ -39,20 +39,19 @@ class ChapterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            
+
             'TomTat' => 'required|max:255',
-            'TieuDe' => 'required|unique:Chapter|max:255',
+            'TieuDe' => 'unique:Chapter|max:255',
             'TenSlugChapter' => 'required|max:255',
             'KichHoat' => 'required',
             'NoiDung' => 'required',
             ''
         ], [
-            'TieuDe.unique' => 'Tên danh mục đã tồn tại! Xin vui lòng điền tên khác!',
             'TomTat.required' => 'Tóm tắt phải có',
             'TieuDe.required' => 'Tiêu đề phải có',
             'TenSlugChapter.required' => 'Tên slug truyện phải có',
             'NoiDung.required' => 'Nội dung phải có',
-            
+
         ]);
 
         $Chapter = new Chapter();
@@ -64,7 +63,7 @@ class ChapterController extends Controller
         $Chapter->NoiDung = $request->input('NoiDung');
         $Chapter->save();
 
-        return redirect()->back()->with('status','Thêm chapter thành công!');
+        return redirect()->back()->with('status', 'Thêm chapter thành công!');
     }
 
     /**
@@ -87,8 +86,8 @@ class ChapterController extends Controller
     public function edit($id)
     {
         $list_chapter = Chapter::find($id);
-        $list_truyen = Truyen::orderBy('id','DESC')->get();
-        return view('admincp.Chapter.edit')->with(compact('list_chapter','list_truyen'));
+        $list_truyen = Truyen::orderBy('id', 'DESC')->get();
+        return view('admincp.Chapter.edit')->with(compact('list_chapter', 'list_truyen'));
     }
 
     /**
@@ -101,20 +100,19 @@ class ChapterController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            
+
             'TomTat' => 'required|max:255',
-            'TieuDe' => 'required|unique:Chapter|max:255',
+            'TieuDe' => 'unique:Chapter|max:255',
             'TenSlugChapter' => 'required|max:255',
             'KichHoat' => 'required',
             'NoiDung' => 'required',
             ''
         ], [
-            'TieuDe.unique' => 'Tên danh mục đã tồn tại! Xin vui lòng điền tên khác!',
             'TomTat.required' => 'Tóm tắt phải có',
             'TieuDe.required' => 'Tiêu đề phải có',
             'TenSlugChapter.required' => 'Tên slug truyện phải có',
             'NoiDung.required' => 'Nội dung phải có',
-            
+
         ]);
 
         $Chapter = Chapter::find($id);
@@ -126,8 +124,7 @@ class ChapterController extends Controller
         $Chapter->NoiDung = $request->input('NoiDung');
         $Chapter->save();
 
-        return redirect()->back()->with('status','Chỉnh sửa chapter thành công!');
-
+        return redirect()->back()->with('status', 'Chỉnh sửa chapter thành công!');
     }
 
     /**
@@ -139,6 +136,6 @@ class ChapterController extends Controller
     public function destroy($id)
     {
         Chapter::find($id)->delete();
-        return redirect()->back()->with('status','Xóa chapter thành công!');
+        return redirect()->back()->with('status', 'Xóa chapter thành công!');
     }
 }

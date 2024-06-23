@@ -35,7 +35,7 @@
                           </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Tác giả</label>
-                          <input type="text" class="form-control"  aria-describedby="emailHelp" name="TenTruyen"  placeholder="Tác giả truyện..." id="slug" onkeyup="ChangeToSlug();">
+                          <input type="text" class="form-control"  aria-describedby="emailHelp" name="TacGia"  placeholder="Tác giả truyện..." id="slug" onkeyup="ChangeToSlug();">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Tóm tắt nội dung</label>
