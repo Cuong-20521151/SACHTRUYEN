@@ -9,9 +9,14 @@ class Truyen extends Model
 {
     use HasFactory;
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
     public $timestamps = false;
     protected $fillable = [
-        'TenTruyen', 'TenSlugTruyen', 'TacGia', 'NoiDungTruyen', 'DanhMuc', 'HinhAnh', 'KichHoat'
+        'TenTruyen', 'TenSlugTruyen', 'TacGia', 'NoiDungTruyen', 'DanhMuc', 'HinhAnh', 'KichHoat', 'created_at', 'updated_at'
     ];
     protected $primaryKey = 'id';
     protected $table = 'Truyen'; // Đảm bảo nhất quán với tên bảng trong migration

@@ -14,7 +14,8 @@ class IndexController extends Controller
         $list_truyen = Truyen::orderBy('id', 'DESC')->where('KichHoat', 0)->get();
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
         $truyen = Truyen::orderBy('id', 'DESC')->where('KichHoat', 0)->get();
-        return view('pages.home')->with(compact('danhmuc', 'truyen', 'list_truyen'));
+        $truyen_moi = Truyen::orderBy('created_at', 'DESC')->where('KichHoat', 0)->get();
+        return view('pages.home')->with(compact('danhmuc', 'truyen', 'list_truyen', 'truyen_moi'));
     }
 
     public function theloai($slug)
@@ -65,5 +66,19 @@ class IndexController extends Controller
 
         // Return the view with all necessary data
         return view('pages.timkiem')->with(compact('danhmuc', 'truyen', 'list_truyen', 'tukhoa'));
+    }
+
+    public function truyenmoi()
+    {
+        $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
+        $truyen = Truyen::orderBy('created_at', 'DESC')->where('KichHoat', 0)->get();
+        return view('pages.Truyenmoi')->with(compact('danhmuc', 'truyen'));
+    }
+
+    public function truyenhay()
+    {
+        $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
+        $truyen = Truyen::orderBy('id', 'DESC')->where('KichHoat', 0)->get();
+        return view('pages.Truyenhay')->with(compact('danhmuc', 'truyen'));
     }
 }

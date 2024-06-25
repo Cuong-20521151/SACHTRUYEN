@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
+        <li class="breadcrumb-item"><a href="{{ url()->current() }}">Danh mục</a></li>
         </ol>
     </nav> 
     @php

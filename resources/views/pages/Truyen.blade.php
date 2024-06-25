@@ -59,7 +59,7 @@
             <ul class="mucluctruyen" style="list-style: none; padding: 0;">
                 @if ($mucluc > 0)
                     @foreach($chapter as $key => $chap)
-                        <li style="margin-bottom: 5px;"><a href="{{ url('xem-chapter/'.$chap->slug_chapter) }}">{{ $chap->TieuDe }}</a></li>
+                        <li style="margin-bottom: 5px;"><a href="{{ url('xem-chuong/'.$chap->TenSlugChapter) }}">{{ $chap->TieuDe }}</a></li>
                     @endforeach
                 @else
                     <li>Đang cập nhật...</li>
@@ -89,6 +89,7 @@
                     @endforeach
                 </div>
             </div>
+            <div class="fb-comments" data-href="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v20.0" data-width="" data-numposts="5"></div>
         </div>
     </div>
 </body>

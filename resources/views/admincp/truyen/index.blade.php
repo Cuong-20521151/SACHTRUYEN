@@ -4,7 +4,7 @@
 @include('layouts.nav')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8"  style="width: 1000px">
             <div class="card">
                 <div class="card-header">Danh sách truyện</div>
                 <div class="card-body">
@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <table class="table">
+                    <table class="table" >
                         <thead>
                           <tr>
                             <th scope="col">#</th>
@@ -24,6 +24,8 @@
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Danh mục</th>
                             <th scope="col">Kích hoạt</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Ngày cập nhật</th>
                             <th scope="col">Quản lý</th>
                           </tr>
                         </thead>
@@ -42,6 +44,14 @@
                                             <span class="text text-success">Kích Hoạt</span>
                                         @else
                                             <span class="text text-danger">Không kích Hoạt</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{$truyen->created_at}}
+                                    </td>
+                                    <td>
+                                        @if ($truyen->updated_at != '' )
+                                            {{$truyen->updated_at}}
                                         @endif
                                     </td>
                                     <td>

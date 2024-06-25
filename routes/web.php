@@ -27,6 +27,10 @@ Route::get('/xem-chuong/{slug}', [IndexController::class, 'xemchuong'])->name('x
 
 Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
 
+Route::get('/truyen-hay', [IndexController::class, 'truyenhay'])->name('truyen-hay');
+
+Route::get('/truyen-moi', [IndexController::class, 'truyenmoi'])->name('truyen-moi');
+
 Route::get('/admin', [HomeController::class, 'index'])->name('admin');
 
 Route::resource('/danhmuc', DanhMucTruyenController::class);
@@ -34,6 +38,8 @@ Route::resource('/danhmuc', DanhMucTruyenController::class);
 Route::resource('/Truyen', TruyenController::class);
 
 Route::resource('/Chapter', ChapterController::class);
+
+
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.post');

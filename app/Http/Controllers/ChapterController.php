@@ -41,14 +41,15 @@ class ChapterController extends Controller
         $request->validate([
 
             'TomTat' => 'required|max:255',
-            'TieuDe' => 'unique:Chapter|max:255',
+            'TieuDe' => 'required|unique:Chapter|max:255',
             'TenSlugChapter' => 'required|max:255',
             'KichHoat' => 'required',
             'NoiDung' => 'required',
-            ''
+            'id_truyen' => 'required',
         ], [
             'TomTat.required' => 'Tóm tắt phải có',
             'TieuDe.required' => 'Tiêu đề phải có',
+            'TieuDe.unique' => 'Tiêu đề đã có',
             'TenSlugChapter.required' => 'Tên slug truyện phải có',
             'NoiDung.required' => 'Nội dung phải có',
 
@@ -85,9 +86,9 @@ class ChapterController extends Controller
      */
     public function edit($id)
     {
-        $list_chapter = Chapter::find($id);
+        $Chapter = Chapter::find($id);
         $list_truyen = Truyen::orderBy('id', 'DESC')->get();
-        return view('admincp.Chapter.edit')->with(compact('list_chapter', 'list_truyen'));
+        return view('admincp.Chapter.edit')->with(compact('Chapter', 'list_truyen'));
     }
 
     /**
@@ -102,11 +103,11 @@ class ChapterController extends Controller
         $request->validate([
 
             'TomTat' => 'required|max:255',
-            'TieuDe' => 'unique:Chapter|max:255',
+            'TieuDe' => 'required|max:255',
             'TenSlugChapter' => 'required|max:255',
             'KichHoat' => 'required',
             'NoiDung' => 'required',
-            ''
+            'id_truyen' => 'required',
         ], [
             'TomTat.required' => 'Tóm tắt phải có',
             'TieuDe.required' => 'Tiêu đề phải có',

@@ -17,7 +17,7 @@ class CreateChapter extends Migration
             $table->id();
             $table->unsignedBigInteger('id_truyen');
             $table->string('TomTat', 255);
-            $table->string('TieuDe', 255)->unique();
+            $table->string('TieuDe', 255);
             $table->string('TenSlugChapter', 255);
             $table->text('NoiDung');
             $table->boolean('KichHoat');

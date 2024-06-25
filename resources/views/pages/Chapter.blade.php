@@ -36,16 +36,27 @@
         </div>
 
         <div class="col-md-5 mt-4">
-            <div class="form-group">
+            <div class="form-group" >
+                
                 <label for="selectChapter">Chọn chương</label>
+                
+                <p>
+                    <a class="btn btn-primary {{ $chapter->id == $min_id->id ? 'disabled' : '' }}" href="{{ url('xem-chuong/'.$previous_chapter) }}">Tập Trước</a>
+                </p>
                 <select name="select-chapter" class="select-chapter custom-select">
                     @foreach($all_chapter as $key => $chap)
                         <option value="{{ url('xem-chuong/'.$chap->TenSlugChapter) }}">{{ $chap->TieuDe }}</option>
                     @endforeach
                 </select>
+                <p class="mt-4">
+                    <a class="btn btn-primary {{ $chapter->id == $max_id->id ? 'disabled' : '' }}" href="{{ url('xem-chuong/'.$next_chapter) }}">Tập Sau</a>
+                </p>
+                
             </div>
         </div>
-
+        <hr>
+        <div class="fb-comments" data-href="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v20.0" data-width="" data-numposts="5"></div>
+        <hr>
         <div class="mt-4">
             <h3>Lưu và chia sẻ truyện:</h3>
             <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>

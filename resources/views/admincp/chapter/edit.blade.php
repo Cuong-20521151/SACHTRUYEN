@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Thêm chapter</div>
+                <div class="card-header">Sửa thông tin chương</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -23,37 +23,38 @@
                         </div>
                     @endif
                     
-                    <form method="POST" action={{route('Chapter.store')}} enctype="multipart/form-data">
+                    <form method="POST" action={{route('Chapter.update',[$Chapter->id])}} enctype="multipart/form-data">
+                        @method("PUT")
                         @csrf
                         
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Tên Chapter</label>
-                          <input type="text" class="form-control"  aria-describedby="emailHelp" name="TieuDe"  placeholder="Tiêu đề truyện..." id="slug" onkeyup="ChangeToSlug();" value="{{$list_chapter->TieuDe}}">
+                          <input type="text" class="form-control"  aria-describedby="emailHelp" name="TieuDe"  placeholder="Tiêu đề truyện..." id="slug" onkeyup="ChangeToSlug();" value="{{$Chapter->TieuDe}}">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Tóm tắt</label>
-                            <input type="text" class="form-control"  aria-describedby="emailHelp" name="TomTat"  placeholder="Tóm tắt truyện..." value="{{$list_chapter->TomTat}}">
+                            <input type="text" class="form-control"  aria-describedby="emailHelp" name="TomTat"  placeholder="Tóm tắt truyện..." value="{{$Chapter->TomTat}}">
                           </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Tên slug chapter</label>
-                            <input type="text" class="form-control"  aria-describedby="emailHelp" name="TenSlugChapter" id="convert_slug" value="{{$list_chapter->TenSlugChapter}}">
+                            <input type="text" class="form-control"  aria-describedby="emailHelp" name="TenSlugChapter" id="convert_slug" value="{{$Chapter->TenSlugChapter}}">
                           </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nội dung</label>
-                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="NoiDung" placeholder="Nội dung..." rows="5" style="resize: none">{{$list_chapter->NoiDung}}</textarea>
+                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="NoiDung" placeholder="Nội dung..." rows="5" style="resize: none">{{$Chapter->NoiDung}}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="disabledSelect" class="form-label">Thuộc truyện</label>
                             <select name="id_truyen" class="form-select" class="custom-select" >
                                 @foreach ($list_truyen as $key => $truyen)
-                                    <option {{$truyen->id==$list_chapter->id_truyen ? 'selected' : ''}} value="{{$truyen->id}}">{{$truyen->TenTruyen}}</option>                                    
+                                    <option {{$truyen->id==$Chapter->id_truyen ? 'selected' : ''}} value="{{$truyen->id}}">{{$truyen->TenTruyen}}</option>                                    
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="disabledSelect" class="form-label">Kích hoạt</label>
                             <select id="disabledSelect" class="form-select" name="KichHoat">
-                                @if ($list_chapter->KichHoat == 0)
+                                @if ($Chapter->KichHoat == 0)
                                     <option selected value="0">Kích Hoạt</option>
                                     <option value="1">Không kích Hoạt</option>
                                 @else
@@ -62,7 +63,7 @@
                                 @endif
                             </select>
                         </div>
-                        <button type="submit" name="ThemChapter" class="btn btn-primary">Chỉnh sửa</button>
+                        <button type="submit" name="SuaChapter" class="btn btn-primary">Chỉnh sửa</button>
                       </form>
                 </div>
             </div>

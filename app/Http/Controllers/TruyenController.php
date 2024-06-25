@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\DanhmucTruyen;
 use App\Models\Truyen;
@@ -59,6 +60,7 @@ class TruyenController extends Controller
         $Truyen->TenSlugTruyen = $request->input('TenSlugTruyen');
         $Truyen->TacGia = $request->input('TacGia');
         $Truyen->NoiDungTruyen = $request->input('NoiDungTruyen');
+        $Truyen->created_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         $path = 'public/uploads/truyen/';
         $image = $request->file('HinhAnh');
@@ -129,6 +131,8 @@ class TruyenController extends Controller
         $Truyen->NoiDungTruyen = $request->input('NoiDungTruyen');
         $Truyen->DanhMuc = $request->input('DanhMuc');
         $Truyen->KichHoat = $request->input('KichHoat');
+        $Truyen->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+
         $get_image = $request->HinhAnh;
         if ($get_image) {
             $path = 'public/uploads/truyen/';
