@@ -1,5 +1,8 @@
 @extends('../layout')
 @section('content')
+<head>
+    <link rel="stylesheet" href="{{ asset('resources/css/Danhmuc.css') }}">
+</head>
 <body>
 
     <nav aria-label="breadcrumb">
@@ -31,5 +34,6 @@
         </div>
         @endforeach
     </div>
+    <div>{{$truyen->links()}}</div>
 </body>
 @endsection
